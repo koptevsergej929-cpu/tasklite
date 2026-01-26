@@ -1,0 +1,57 @@
+.container{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.form-add__input{
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: white;
+    color: #9b96a6;
+}
+
+.form-add__button{
+    padding: 12px 45px;
+    border-radius: 8px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    background-color: #7e66cd;
+    cursor: pointer;
+}
+
+.toolbar__search{
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 14px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    border-radius: 8px;
+    background-color: white;
+}
+
+.tabs__item tabs__item--active{
+    padding: 12px 45px;
+    border-radius: 8px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    background-color: #7e66cd;
+}
+
+.tabs__item{
+    padding: 12px 45px;
+    border-radius: 8px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    background-color: #7e66cd;
+    cursor: pointer;
+}
