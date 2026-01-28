@@ -1,8 +1,69 @@
 .container{
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 24px;
+
+}
+
+*{
+    box-sizing: border-box;
+}
+
+
+html, body{
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    height: 100%;
+}
+
+.header{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+    background: rgba(255, 255, 255, .65);
+}
+
+.header__container{
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.header__title{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.tabs{
+    display: flex;
     gap: 12px;
-    margin-bottom: 15px;
+}
+
+.tab{
+    text-decoration: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 8px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+}
+
+.tab,active{
+    background: #e8e8e8;
+    border-color: #bbb;
+    font-weight: 500;
+}
+
+.form-add{
+    display: flex;
+    margin-bottom: 12px;
+    gap: 12px;
 }
 
 .form-add__input{
@@ -45,13 +106,9 @@
     background-color: #7e66cd;
 }
 
-.tabs__item{
-    padding: 12px 45px;
-    border-radius: 8px;
-    border: 1px solid rgba(30, 10, 60, 0.12);
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-    background-color: #7e66cd;
-    cursor: pointer;
+.toolbar{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
 }
