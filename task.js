@@ -1,9 +1,17 @@
-let num = 1
+let title = ""
 
-let num1 = 12
+if (title === ""){
+    console.log("Название задачи не указана");
+}else{
+    console.log("Задача", title);
+}
 
-let sum = num + num1
+let tasks = 5
 
-let dif = num - num1
-
-console.log(sum, dif)
+if (tasks === 0){
+    console.log("Нету задач");
+}else if(tasks <= 3){
+    console.log("Мало задач");
+}else{
+    console.log("Много задач");
+}
