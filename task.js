@@ -27,3 +27,24 @@ if (amount == 0){
 }else {
     console.log("Скидка 10%");
 }
+
+
+function sum(a, b) {
+    return a + b;
+}
+console.log(sum(3, 4));
+console.log(sum(10, 5));
+
+function isTaskDone(status) {
+    return status === "выполнена";
+}
+console.log(isTaskDone("выполнена"));
+console.log(isTaskDone("активна"));
+
+function taskSum(total, done){
+    let active = total - done
+    return "Всего: " + total + " | выполнено: " + done + " | Активных: " + active
+}
+console.log(taskSum(5, 3));
+console.log(taskSum(10, 4));
+
