@@ -48,3 +48,25 @@ function taskSum(total, done){
 console.log(taskSum(5, 3));
 console.log(taskSum(10, 4));
 
+let cities = ["Тюмень", "Мурманск", "Юровка", "Пермь"];
+
+console.log(cities[2]);
+
+let task = {
+    id: 1,
+    title: "Вася во всём виноват",
+    status: "активна"
+};
+
+console.log(task.status);
+
+let tasks1 = [
+    {id: 1, title: "Вася не в сём не виноват", status: "активна"},
+    {id: 2, title: "Позвонить врачу", status: "выполнена"},
+    {id: 3, title: "Сдать Афину в психушку", status: "активна"}
+];
+
+tasks1.push({id: 4, title: "Прогулка", status: "активна"});
+
+console.log(tasks1);
+console.log(task.title.length);
