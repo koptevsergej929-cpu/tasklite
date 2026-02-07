@@ -6,15 +6,15 @@ if (title === ""){
     console.log("Задача", title);
 }
 
-let tasks = 5
+//let tasks = 5
 
-if (tasks === 0){
-    console.log("Нету задач");
-}else if(tasks <= 3){
-    console.log("Мало задач");
-}else{
-    console.log("Много задач");
-}
+//if (tasks === 0){
+//console.log("Нету задач");
+//}else if(tasks <= 3){
+//    console.log("Мало задач");
+//}else{
+//    console.log("Много задач");
+//}
 
 let amount = 0;
 
@@ -70,3 +70,22 @@ tasks1.push({id: 4, title: "Прогулка", status: "активна"});
 
 console.log(tasks1);
 console.log(task.title.length);
+
+function FindTaskByTitle(tasks, title){
+    
+
+    for (let i = 0; i < tasks.length; i++){
+        const task = tasks[i];
+    }
+    if (task && typeof task.title === "string" && task.title === title){
+        return task;
+    }
+    return "Задача не найдена";
+}
+const tasks = [
+        {id: 1, title: "Делать уроки из КОД", status: "false"},
+        {id: 2, title: "Гулять с друзьями", status: "true"},
+        {id: 3, title: "Читать книги", status: "false"}
+    ];
+console.log(FindTaskByTitle(tasks, "Найти кота"));
+console.log(FindTaskByTitle(tasks, "Читать книги"));
