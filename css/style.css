@@ -289,7 +289,7 @@ html, body{
     cursor: pointer;
     background-color: transparent;
     text-align: left;
-    transition: all 0.2 ease;
+    transition: all 0.3 ease;
     color: #735cc6;
     border-color: #a28bdc;
 }
