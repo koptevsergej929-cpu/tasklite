@@ -209,10 +209,14 @@
 
 // console.log("------------------------------------------------");
 
-function renderTask(taskData) {
-const input = document.querySelector('.form-add__input')
-const addButton = document.querySelector('.form-add__button')
-const container = document.querySelector('.tasks')
+// function renderTask(taskData) {
+// const input = document.querySelector('.form-add__input')
+// const addButton = document.querySelector('.form-add__button')
+// const container = document.querySelector('.tasks')
+
+// const searchinput = document.querySelector('.toolbar__search')
+// const footer = document.querySelector('.footer-controls')
+// const sortSelect = document.querySelector('.toolbar__sort')
 // const task = document.createElement('div')
 // task.classList.add('task')
 
@@ -267,148 +271,203 @@ const container = document.querySelector('.tasks')
 // actions.append(editBtn, deleteBtn)
 // task.append(content, actions)
 
-return task
-}
+// return task
+// }
 
-const container = document.querySelector('main')
+// const container = document.querySelector('main')
 
-const task1 = renderTask({
-    text: "Сходить на прогулку",
-    data: "30.02.2050"
-})
+// const task1 = renderTask({
+//     text: "Сходить на прогулку",
+//     data: "30.02.2050"
+// })
 
-const task2 = renderTask({
-    text: "Попить чай",
-    data: "30.03.2025"
-})
+// const task2 = renderTask({
+//     text: "Попить чай",
+//     data: "30.03.2025"
+// })
 
-container.append(task1, task2)
-
-const searchinput = document.querySelector('.toolbar__search')
-const footer = document.querySelector('.footer-controls')
-const sortSelect = document.querySelector('.toolbar__sort')
-
-
-let tabButtons = document.querySelectorAll('.tabs__item')
-let clearButton = document.querySelector('.footer-controls__clear')
+// container.append(task1, task2)
 
 
 
-const tasks = [
-  { text: 'Купить продукты', done: false, date: 'Сегодня, 12:00' },
-  { text: 'Объявим мир', done: true, date: 'Сегодня, 22:00' },
-];
+
+// let tabButtons = document.querySelectorAll('.tabs__item')
+// let clearButton = document.querySelector('.footer-controls__clear')
+
+
+
+// const tasks = [
+//   { text: 'Купить продукты', done: false, date: 'Сегодня, 12:00' },
+//   { text: 'Объявим мир', done: true, date: 'Сегодня, 22:00' },
+//   { text: 'Прибраться дама', done: true, date: 'Сегодня, 12:00' },
+//   { text: 'Сделать уроки', done: false, date: 'Сегодня, 18:47' },
+//   { text: 'Сходить к врачу', done: false, date: 'Сегодня, 20:37' },
+//   { text: 'Позвонить сесте', done: true, date: 'Сегодня, 15:25' },
+//   { text: 'Заполнить журнал', done: true, date: 'Сегодня, 10:15'}
+// ];
 
 // console.log("---------------------------------------------")
 
-function renderTasks() {
-const task = document.createElement('div')
-task.classList.add('task')
+const input = document.querySelector(".form-add__input");
+const addButton = document.querySelector(".form-add__button");
+const container = document.querySelector(".tasks");
+const form = document.querySelector('.form-add')
+
+const searchInput = document.querySelector(".toolbar__search");
+const footer = document.querySelector(".footer-controls");
+const sortSelect = document.querySelector(".toolbar__sort");
+let tasks = []
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault()
+  const text = input.value.trim()
+  if(text === '') return
+  addTask()
 
 
-const content = document.createElement('div')
-content.classList.add('task__content')
-task.append(content)
+const newTask = {
+  id: tasks.length + 1,
+  taxt: text,
+  dene: false,
+  date: FormatDate(new Date())
+}
+tasks.push(newTask)
+})
 
-const title = document.createElement('div')
-title.classList.add('task__title')
+function addTask(){
+  const text = input.value.trim()
 
-const meta = document.createElement('div')
-meta.classList.add('task__meta')
+  if(text === '' || text.length < 3){
+    input.classList.add('input--error')
+    return
+  }else{
+    input.classList.remove('input--error')
+  }
 
-content.append(title, meta)
+  const newTask = {
+    id: tasks.length + 1,
+    text,
+    done: false,
+    date: 'создана сейчас'
+  }
+  tasks.push(newTask)
+  input.value = ''
+  renderAll()
+}
 
+function renderTask(task) {
+  const item = document.createElement("div");
+  item.classList.add("task");
 
-const actions = document.createElement('div')
-actions.classList.add('task__actions')
-task.append(content, actions);
+  const content = document.createElement("div");
+  content.classList.add("task__content");
 
-const editBtn = document.createElement('button')
-editBtn.classList.add('task__action', 'task__action--edit')
-editBtn.title = 'Редактировать'
-editBtn.innerHTML =`
-<svg class="task__icon" viewBox="0 0 24 24" fill="none"
-stroke="#6f64a3" stroke-width="2"
-stroke-linecap="round" stroke-linejoin="round">
-<path d="M12 20h9" />
-<path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5
-3.5z" />
-</svg>
-`
+  const title = document.createElement("div");
+  title.classList.add("task__title");
+  title.textContent = task.text;
 
+  const meta = document.createElement("div");
+  meta.classList.add("task__meta");
+  meta.textContent = task.date;
+  content.append(title, meta);
 
-const deleteBtn = document.createElement('button')
-deleteBtn.classList.add('task__action', 'task__action--delete')
-deleteBtn.title = 'Удалить'
-deleteBtn.innerHTML = `
-<svg class="task__icon" viewBox="0 0 24 24" fill="none"
-stroke="#cb6e6e" stroke-width="2"
-stroke-linecap="round" stroke-linejoin="round">
-<polyline points="3 6 5 6 21 6" />
-<path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-<path d="M10 11v6" />
-<path d="M14 11v6" />
-<path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
-</svg>
-`
+  const actions = document.createElement("div");
+  actions.classList.add("task__actions");
 
+  const editBtn = document.createElement("button");
+  editBtn.classList.add("task__action", "task__action--edit");
+  editBtn.innerHTML = `
+<svg
+              class="task__icon"
+              viewBox="0 0 24 24"
+              width="14"
+              height="14"
+              fill="none"
+              stroke="#6f64a3"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 20h9" />
+              <path
+                d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
+              />
+            </svg>
+`;
 
-actions.append(editBtn, deleteBtn)
-task.append(content, actions)
+  editBtn.addEventListener('click', () => {
+    const newText = prompt('Изменить задачу:', task.text);
+    if (newText && newText.trim() !== '') {
+      const text = input.value.trim()
+      task.text = newText.trim();
+      renderAll();
+    }
+  });
 
+  const deleteBtn = document.createElement("button");
+  deleteBtn.classList.add("task__action", "task__action--delete");
+  deleteBtn.innerHTML = `
+<svg
+              class="task__icon"
+              viewBox="0 0 24 24"
+              width="14 "
+              height="14"
+              fill="none"
+              stroke="#cb6e6e"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="3 6 5 6 21 6" />
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+              <path d="M10 11v6" />
+              <path d="M14 11v6" />
+              <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+            </svg>`;
 
-  container.innerHTML = '';
+  deleteBtn.addEventListener("click", () => {
+    const index = tasks.indexOf(task);
+    tasks.splice(index, 1);
 
-   tasks.forEach((task) => {
-     const item = document.createElement('div');
-     item.classList.add('task');
+    renderAll()
+  });
 
-     item.addEventListener('click', (e) => {
-      if(e.target.closet('.task__action')) return
-      task.done = !task.done
-      renderTask()
-     })
+  actions.append(editBtn, deleteBtn);
+  item.append(content, actions);
 
-    })
+  if (task.done) {
+    item.classList.add("task--done");
+  }
 
+  item.addEventListener("click", (event) => {
+    console.log(event.target);
+    if (event.target.closest(".task__action")) return;
+    task.done = !task.done;
+    renderAll()
+  });
 
-    if (task.done) item.classList.add('task--done');
-
-      const editBtn = document.createElement('button');
-    editBtn.addEventListener('click', () => {
-        const newText = prompt('Изменить задачу:', task.text);
-        if (newText && newText.trim() !== '') {
-          task.text = newText.trim();
-        }
-
-        const deleteBtn = document.createElement('button');
-           deleteBtn.addEventListener('click', () => {
-              const index = tasks.indexOf(task);
-              tasks.splice(index, 1);
-              renderTasks();
-            });
-
-
-     task.addEventListener('click', () => {
-        task.done = !task.done;
-        renderTasks()
-     })
-
-
-    });
-
+  return item;
 }
 
 
-function renderAll(){
-    document.querySelectorAll('.task').forEach(t => t.remove())
-    const footer = document.querySelector('.footer-controls')
 
-    tasks.forEach(task =>{
-      const card = renderTasks(task)
-      footer.before(card)
-    })
+function renderAll() {
+  document.querySelectorAll(".task").forEach(t => t.remove())
+  tasks.forEach((task) => {
+    const card = renderTask(task)
+    container.append(card)
+  });
 }
 
 
 renderAll()
+
+function FormatDate(date) {
+    const d = date.getDate().toString().padStart(2, '0');
+    const m = (date.getMonth() + 1).toString().padStart(2, '0');
+    const y = date.getFullYear();
+    const h = date.getHours().toString().padStart(2, '0');
+    const min = date.getMinutes().toString().padStart(2, '0');
+
+    return `${d}.${m}.${y}, ${h}.${min}`;
+}
