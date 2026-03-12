@@ -328,7 +328,7 @@ form.addEventListener('submit', (event) => {
 const newTask = {
   id: tasks.length + 1,
   taxt: text,
-  dene: false,
+  done: false,
   date: FormatDate(new Date())
 }
 tasks.push(newTask)
@@ -398,7 +398,6 @@ function renderTask(task) {
   editBtn.addEventListener('click', () => {
     const newText = prompt('Изменить задачу:', task.text);
     if (newText && newText.trim() !== '') {
-      const text = input.value.trim()
       task.text = newText.trim();
       renderAll();
     }
@@ -457,6 +456,15 @@ function renderAll() {
     const card = renderTask(task)
     container.append(card)
   });
+
+  const sorterTask = [...tasks].sort((a, b) => {
+    if(sortOrder === 'new') return b.id - a.id
+    if(sortOrder === 'old') return a.id - b.id
+    if(sortOrder === 'az') return a.text > b.text ? 1 : -1
+    if(sortOrder === 'za') return a.text < b.text ? 1 : -1
+    return a.id - b.id
+  })
+  sorterTask.forEach(task => container.append(renderTask(task)))
 }
 
 
@@ -471,3 +479,14 @@ function FormatDate(date) {
 
     return `${d}.${m}.${y}, ${h}.${min}`;
 }
+
+let sortOrder = 'new' | 'old | az | za';
+sortSelect.addEventListener('change', () => {
+  const val = sortSelect.value
+  if(val.includes('новые')) sortOrder = 'new'
+  else if(val.includes('старые')) sortOrder = 'old'
+  else if(val.includes('A-Z')) sortOrder = 'az'
+  else if(val.includes('Z-A')) sortOrder = 'za'
+  sortOrder = sortSelect.value.includes('новые') ? 'new' : 'old'
+  renderAll()
+})

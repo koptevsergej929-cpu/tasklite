@@ -15,9 +15,9 @@
 
 // console.log("----------------------------------------------------------");
 
-const D = new Date().getHours();
-
 function watch(){
+    const D = new Date().getHours();
+
     if (D >= 6 && D < 12){
         return "Утро";
     } else if (D >= 12 && D < 18){
