@@ -188,14 +188,6 @@ html, body{
 }
 
 .tasks{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 15px;
-}
-
-.tasks{
     padding: 10px 12px;
     border: 1px solid rgba(30, 10, 60, 0.12);
     border-radius: 8px;
@@ -205,6 +197,8 @@ html, body{
     align-items: center;
     justify-content: center;
     gap: 8px;
+    align-items: baseline;
+    flex-direction: column;
 
 }
 

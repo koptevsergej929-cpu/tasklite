@@ -312,48 +312,37 @@ const input = document.querySelector(".form-add__input");
 const addButton = document.querySelector(".form-add__button");
 const container = document.querySelector(".tasks");
 const form = document.querySelector('.form-add')
+const tabButtons = document.querySelectorAll('.tab__item');
 
 const searchInput = document.querySelector(".toolbar__search");
 const footer = document.querySelector(".footer-controls");
 const sortSelect = document.querySelector(".toolbar__sort");
 let tasks = []
 
+
+
+
 form.addEventListener('submit', (event) => {
   event.preventDefault()
   const text = input.value.trim()
-  if(text === '') return
-  addTask()
-
-
-const newTask = {
-  id: tasks.length + 1,
-  taxt: text,
-  done: false,
-  date: FormatDate(new Date())
-}
-tasks.push(newTask)
-})
-
-function addTask(){
-  const text = input.value.trim()
-
-  if(text === '' || text.length < 3){
+  
+  if (text === '' || text.length < 3) {
     input.classList.add('input--error')
     return
-  }else{
+  } else {
     input.classList.remove('input--error')
   }
 
   const newTask = {
     id: tasks.length + 1,
-    text,
+    text: text,
     done: false,
-    date: 'создана сейчас'
+    date: formatDate(new Date())
   }
   tasks.push(newTask)
   input.value = ''
   renderAll()
-}
+})
 
 function renderTask(task) {
   const item = document.createElement("div");
@@ -450,43 +439,69 @@ function renderTask(task) {
 
 
 
+
 function renderAll() {
-  document.querySelectorAll(".task").forEach(t => t.remove())
-  tasks.forEach((task) => {
-    const card = renderTask(task)
-    container.append(card)
+  container.innerHTML = ''
+
+  let filtered = tasks.filter(task =>{
+    if (currentFilter === 'active') return !task.done;
+    if (currentFilter === 'done') return task.done;
+    return true;
   });
 
-  const sorterTask = [...tasks].sort((a, b) => {
+  const query = searchInput.value.trim().toLowerCase();
+  if (query){
+    filtered = filtered.filter(task => 
+      task.text.toLowerCase().includes(query)
+    );
+  }
+  
+  const sortedTasks = [...tasks].sort((a, b) => {
     if(sortOrder === 'new') return b.id - a.id
     if(sortOrder === 'old') return a.id - b.id
     if(sortOrder === 'az') return a.text > b.text ? 1 : -1
     if(sortOrder === 'za') return a.text < b.text ? 1 : -1
     return a.id - b.id
   })
-  sorterTask.forEach(task => container.append(renderTask(task)))
+  
+  sortedTasks.forEach(task => {
+    const card = renderTask(task)
+    container.append(card)
+  })
 }
+
+searchInput.addEventListener('input', renderAll);
+
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabButtons.forEach(b => b.classList.remove('tabs__item--active'));
+    btn.classList.add('tabs__item--active');
+      if (btn.textContent.includes('Активные')) currentFilter = 'active';
+        else if (btn.textContent.includes('Заверш')) currentFilter = 'done';
+       else currentFilter = 'all';
+  });
+});
 
 
 renderAll()
 
-function FormatDate(date) {
-    const d = date.getDate().toString().padStart(2, '0');
-    const m = (date.getMonth() + 1).toString().padStart(2, '0');
-    const y = date.getFullYear();
-    const h = date.getHours().toString().padStart(2, '0');
-    const min = date.getMinutes().toString().padStart(2, '0');
-
-    return `${d}.${m}.${y}, ${h}.${min}`;
+function formatDate(date){
+  const day = date.getDate().toString().padStart(2, '0')
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const year = date.getFullYear()
+  const hour = date.getHours().toString().padStart(2, '0')
+  const min = date.getMinutes().toString().padStart(2, '0')
+  return `${day}.${month}.${year}, ${hour}:${min}`
 }
 
-let sortOrder = 'new' | 'old | az | za';
+let sortOrder = 'new';
 sortSelect.addEventListener('change', () => {
   const val = sortSelect.value
   if(val.includes('новые')) sortOrder = 'new'
-  else if(val.includes('старые')) sortOrder = 'old'
+  else if (val.includes('старые')) sortOrder = 'old'
   else if(val.includes('A-Z')) sortOrder = 'az'
   else if(val.includes('Z-A')) sortOrder = 'za'
-  sortOrder = sortSelect.value.includes('новые') ? 'new' : 'old'
   renderAll()
 })
+
+let currentFilter = 'all'
