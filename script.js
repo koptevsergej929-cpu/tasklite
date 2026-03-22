@@ -29,3 +29,18 @@ function watch(){
     }
 }
 console.log(watch());
+
+// console.log("----------------------------------------------------------");
+
+const mini__tasks = [
+    {text: "A piace of cake"},
+    {text: "Школьный проект"},
+    {text: "ПРОЕКТ ПО ОТКРЫТИЮ ПАРКА"},
+    {text: "расмотр дизайна"},
+    {text: "Изучиить новую тему"}
+];
+
+const filteredMini__Tasks = mini__tasks.filter(task => task.text.toLocaleLowerCase().includes("проект"));
+
+console.log("Задачи использующие слово проект:");
+console.log(filteredMini__Tasks);
