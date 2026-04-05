@@ -39,6 +39,7 @@ form.addEventListener('submit', (event) => {
   input.value = ''
   renderAll()
   saveTasks()
+  updateCounters()
 })
 
 function renderTask(task) {
@@ -87,6 +88,7 @@ function renderTask(task) {
       task.text = newText.trim();
       renderAll();
       saveTasks()
+      updateCounters();
     }
   });
 
@@ -117,6 +119,7 @@ function renderTask(task) {
 
     renderAll()
     saveTasks()
+    updateCounters()
   });
 
   actions.append(editBtn, deleteBtn);
@@ -130,7 +133,9 @@ function renderTask(task) {
     console.log(event.target);
     if (event.target.closest(".task__action")) return;
     task.done = !task.done;
+    saveTasks()
     renderAll()
+    updateCounters()
   });
 
   return item;
@@ -155,7 +160,7 @@ function renderAll() {
     );
   }
   
-  const sortedTasks = [...tasks].sort((a, b) => {
+  const sortedTasks = [...filtered].sort((a, b) => {
     if(sortOrder === 'new') return b.id - a.id
     if(sortOrder === 'old') return a.id - b.id
     if(sortOrder === 'az') return a.text > b.text ? 1 : -1
@@ -209,7 +214,11 @@ function updateCounters() {
   const active = tasks.filter(t => !t.done).length;
   const done = tasks.filter(t => t.done).length;
 
-  clearButton.disabled = tasks.every(task => !task.done);
+  const clearButton = document.querySelector('.footer-controls__clear');
+  if (clearButton) {
+    clearButton.disabled = tasks.every(task => !task.done);
+  }
+
   const counters = document.querySelector('.footer-controls__counters');
   if (counters) {
     counters.innerHTML = `
@@ -218,7 +227,14 @@ function updateCounters() {
       <span>Выполненных: ${done}</span>
     `;
   }
-
-  filter.forEach(task => footer.before(renderTask(task)));
-  updateCounters();
 }
+
+updateCounters();
+
+const clearButton = document.querySelector('.footer-controls__clear');
+clearButton.addEventListener('click', () => {
+  tasks = tasks.filter(task => !task.done);
+  saveTasks()
+  renderAll()
+  updateCounters()
+})
