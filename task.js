@@ -238,3 +238,4 @@ clearButton.addEventListener('click', () => {
   renderAll()
   updateCounters()
 })
+

@@ -15,32 +15,52 @@
 
 // console.log("----------------------------------------------------------");
 
-function watch(){
-    const D = new Date().getHours();
+// function watch(){
+//     const D = new Date().getHours();
 
-    if (D >= 6 && D < 12){
-        return "Утро";
-    } else if (D >= 12 && D < 18){
-        return "День";
-    } else if (D >= 18 && D < 24){
-        return "Вечер";
-    } else {
-        return "Ночь";
-    }
+//     if (D >= 6 && D < 12){
+//         return "Утро";
+//     } else if (D >= 12 && D < 18){
+//         return "День";
+//     } else if (D >= 18 && D < 24){
+//         return "Вечер";
+//     } else {
+//         return "Ночь";
+//     }
+// }
+// console.log(watch());
+
+// // console.log("----------------------------------------------------------");
+
+// const mini__tasks = [
+//     {text: "A piace of cake"},
+//     {text: "Школьный проект"},
+//     {text: "ПРОЕКТ ПО ОТКРЫТИЮ ПАРКА"},
+//     {text: "расмотр дизайна"},
+//     {text: "Изучиить новую тему"}
+// ];
+
+// const filteredMini__Tasks = mini__tasks.filter(task => task.text.toLocaleLowerCase().includes("проект"));
+
+// console.log("Задачи использующие слово проект:");
+// console.log(filteredMini__Tasks);
+
+function delay(ms, signal){
+    return new Promise((resolve, reject) => {
+        const timeoutId = setTimeout(resolve, ms)
+        if(signal){
+            signal.addEventListener('abort', () => {
+                clearTimeout(timeoutId)
+                reject(new Error('Delay aborted'))
+            })
+        }
+    })
 }
-console.log(watch());
 
-// console.log("----------------------------------------------------------");
-
-const mini__tasks = [
-    {text: "A piace of cake"},
-    {text: "Школьный проект"},
-    {text: "ПРОЕКТ ПО ОТКРЫТИЮ ПАРКА"},
-    {text: "расмотр дизайна"},
-    {text: "Изучиить новую тему"}
-];
-
-const filteredMini__Tasks = mini__tasks.filter(task => task.text.toLocaleLowerCase().includes("проект"));
-
-console.log("Задачи использующие слово проект:");
-console.log(filteredMini__Tasks);
+async function runSeaquential(tasks){
+    const results = []
+    for(const task of tasks){
+        results.push(aw task())
+    }
+    return results
+}
