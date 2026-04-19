@@ -45,22 +45,40 @@
 // console.log("Задачи использующие слово проект:");
 // console.log(filteredMini__Tasks);
 
-function delay(ms, signal){
-    return new Promise((resolve, reject) => {
-        const timeoutId = setTimeout(resolve, ms)
-        if(signal){
-            signal.addEventListener('abort', () => {
-                clearTimeout(timeoutId)
-                reject(new Error('Delay aborted'))
-            })
-        }
+// function delay(ms, signal){
+//     return new Promise((resolve, reject) => {
+//         const timeoutId = setTimeout(resolve, ms)
+//         if(signal){
+//             signal.addEventListener('abort', () => {
+//                 clearTimeout(timeoutId)
+//                 reject(new Error('Delay aborted'))
+//             })
+//         }
+//     })
+// }
+
+// async function runSeaquential(tasks){
+//     const results = []
+//     for(const task of tasks){
+//         results.push(aw task())
+//     }
+//     return results
+// }
+
+console.log("<<<<<<<<<<<<<<<<<< Homework >>>>>>>>>>>>>>>>>>>")
+
+function normalizeWords(str) {
+    const clean = String(str || "").trim();
+
+    if (!clean) return "";
+
+    const words = clean.split(/\s+/);
+
+    const processedWords = words.map(word => {
+        return word[0].toUpperCase() + word.split(1).toLowerCase();
     })
+    return processedWords.join(" ");
 }
 
-async function runSeaquential(tasks){
-    const results = []
-    for(const task of tasks){
-        results.push(aw task())
-    }
-    return results
-}
+console.log("                  ПрИвЕт           ");
+console.log("  Hi                       WORLD");
