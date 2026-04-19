@@ -75,7 +75,7 @@ function normalizeWords(str) {
     const words = clean.split(/\s+/);
 
     const processedWords = words.map(word => {
-        return word[0].toUpperCase() + word.split(1).toLowerCase();
+        return word[0].toUpperCase() + word.slice(1).toLowerCase();
     })
     return processedWords.join(" ");
 }
