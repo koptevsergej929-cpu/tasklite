@@ -27,7 +27,7 @@ function updateAllCounters() {
     });
 }
 
-function addDragEvents(el) {
+function addDragEvents(el, index) {
   el.addEventListener('dragstart', e => {
     draggedItem = el;
     draggedIndex = index;
@@ -145,6 +145,9 @@ document.querySelectorAll('.add-task').forEach(btn => {
      deadline: cleanDeadline
     };
 
+    if (!boardData[status]) {
+      boardData[status] = [];
+    }
     boardData[status].push(newTask);
 
     renderBoard();
