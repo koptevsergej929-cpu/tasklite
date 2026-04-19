@@ -65,20 +65,37 @@
 //     return results
 // }
 
-console.log("<<<<<<<<<<<<<<<<<< Homework >>>>>>>>>>>>>>>>>>>")
+// console.log("<<<<<<<<<<<<<<<<<< Homework >>>>>>>>>>>>>>>>>>>")
 
-function normalizeWords(str) {
-    const clean = String(str || "").trim();
+// function normalizeWords(str) {
+//     const clean = String(str || "").trim();
 
-    if (!clean) return "";
+//     if (!clean) return "";
 
-    const words = clean.split(/\s+/);
+//     const words = clean.split(/\s+/);
 
-    const processedWords = words.map(word => {
-        return word[0].toUpperCase() + word.slice(1).toLowerCase();
-    })
-    return processedWords.join(" ");
+//     const processedWords = words.map(word => {
+//         return word[0].toUpperCase() + word.slice(1).toLowerCase();
+//     })
+//     return processedWords.join(" ");
+// }
+// console.log("                  ПрИвЕт           ");
+// console.log("  Hi                       WORLD");
+
+// console.log("<<<<<<<<<<<<<<<<<< Homework >>>>>>>>>>>>>>>>>>>")
+
+function findMin(arr) {
+    if (arr.length === 0) return null;
+
+    let result = arr[0];
+
+    for (let i = 1; i < arr.length; i++){
+        if (arr[i] < result) {
+            result = arr[i];
+        }
+    }
+    return result;
 }
-
-console.log("                  ПрИвЕт           ");
-console.log("  Hi                       WORLD");
+console.log(findMin([3, 5, 5, 8, -25, 48, -57]));
+console.log(findMin([]));
+// console.log("<<<<<<<<<<<<<<<<<< Homework >>>>>>>>>>>>>>>>>>>")
