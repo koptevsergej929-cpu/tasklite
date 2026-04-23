@@ -84,18 +84,18 @@
 
 // console.log("<<<<<<<<<<<<<<<<<< Homework >>>>>>>>>>>>>>>>>>>")
 
-function findMin(arr) {
-    if (arr.length === 0) return null;
+// function findMin(arr) {
+//     if (arr.length === 0) return null;
 
-    let result = arr[0];
+//     let result = arr[0];
 
-    for (let i = 1; i < arr.length; i++){
-        if (arr[i] < result) {
-            result = arr[i];
-        }
-    }
-    return result;
-}
-console.log(findMin([3, 5, 5, 8, -25, 48, -57]));
-console.log(findMin([]));
+//     for (let i = 1; i < arr.length; i++){
+//         if (arr[i] < result) {
+//             result = arr[i];
+//         }
+//     }
+//     return result;
+// }
+// console.log(findMin([3, 5, 5, 8, -25, 48, -57]));
+// console.log(findMin([]));
 // console.log("<<<<<<<<<<<<<<<<<< Homework >>>>>>>>>>>>>>>>>>>")
