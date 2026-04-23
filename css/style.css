@@ -55,7 +55,7 @@ html, body{
 }
 
 .tabs__item--active{
-    background: #efaaff;
+    background: #e3ddf4;
     border-color: #cfc6f5;
     color: #735cc6;
 }
